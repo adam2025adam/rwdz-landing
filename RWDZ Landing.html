@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nowy RWDZ — Rejestr Wniosków, Decyzji i Zgłoszeń</title>
+<meta name="description" content="Nowa wersja RWDZ. Prostszy dostęp do informacji publicznej, czytelniejszy interfejs i nowoczesny rejestr wniosków, decyzji i zgłoszeń." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Public+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.plane{display:none!important}</style></noscript>
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" rx="16" fill="#0E5BDF"/>
+    <rect x="30" y="22" width="40" height="52" rx="6" fill="none" stroke="#FFD200" stroke-width="4"/>
+    <rect x="38" y="32" width="12" height="12" rx="2" fill="#FFD200"/>
+    <rect x="38" y="50" width="24" height="4" rx="2" fill="#fff"/>
+    <rect x="38" y="59" width="18" height="4" rx="2" fill="#fff"/>
+  </svg>
+</template>
+
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<!-- ============ SVG SYMBOL LIBRARY ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- RWDZ document mark -->
+    <symbol id="i-rwdz" viewBox="0 0 48 48">
+      <rect x="6" y="5" width="36" height="38" rx="7" fill="none" stroke="currentColor" stroke-width="3.4"/>
+      <rect x="13" y="13" width="9" height="9" rx="2" fill="currentColor"/>
+      <rect x="26" y="14" width="9" height="3" rx="1.5" fill="currentColor"/>
+      <rect x="26" y="20" width="9" height="3" rx="1.5" fill="currentColor"/>
+      <rect x="13" y="28" width="22" height="3" rx="1.5" fill="currentColor"/>
+      <rect x="13" y="34" width="16" height="3" rx="1.5" fill="currentColor"/>
+    </symbol>
+    <!-- open envelope motif -->
+    <symbol id="i-env" viewBox="0 0 100 100">
+      <path d="M14 42 L50 14 L86 42 L86 78 a6 6 0 0 1 -6 6 L20 84 a6 6 0 0 1 -6 -6 Z" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+      <path d="M14 42 L50 64 L86 42" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="round"/>
+    </symbol>
+    <!-- check -->
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13 l4.5 4.5 L19 6.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- search -->
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M16 16 L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <!-- filter -->
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 6 h18 M6 12 h12 M10 18 h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <!-- plus -->
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5 V19 M5 12 H19" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
+    <!-- accessibility person -->
+    <symbol id="i-a11y" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2.2" fill="currentColor"/><path d="M3.5 8 h17 M12 8 v7 M12 15 l-3.5 5.5 M12 15 l3.5 5.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" fill="none"/></symbol>
+    <!-- monitor / nowoczesny -->
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M9 20 h6 M12 16 v4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <!-- list / readable -->
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6 h12 M8 12 h12 M8 18 h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="4" cy="6" r="1.4" fill="currentColor"/><circle cx="4" cy="12" r="1.4" fill="currentColor"/><circle cx="4" cy="18" r="1.4" fill="currentColor"/></symbol>
+    <!-- shield -->
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 l7 3 v5 c0 5-3.2 8-7 10 -3.8-2-7-5-7-10 V6 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M9 12 l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- devices -->
+    <symbol id="i-devices" viewBox="0 0 24 24"><rect x="2.5" y="5" width="13" height="10" rx="1.6" fill="none" stroke="currentColor" stroke-width="2.1"/><rect x="16.5" y="8" width="5.5" height="11" rx="1.4" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M5 18 h7" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+    <!-- clock / fast -->
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M12 7 v5 l3.5 2.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- persona: citizen -->
+    <symbol id="i-citizen" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M5 20 c0-4 3.5-6 7-6 s7 2 7 6" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></symbol>
+    <!-- persona: investor (briefcase) -->
+    <symbol id="i-invest" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M9 8 V6.5 a1.5 1.5 0 0 1 1.5-1.5 h3 A1.5 1.5 0 0 1 15 6.5 V8 M3.5 13 h17" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" fill="none"/></symbol>
+    <!-- persona: designer (ruler/pen) -->
+    <symbol id="i-design" viewBox="0 0 24 24"><path d="M4 17 L15 6 l3 3 L7 20 l-4 1 Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M13 8 l3 3" stroke="currentColor" stroke-width="2.1"/></symbol>
+    <!-- persona: official (building) -->
+    <symbol id="i-official" viewBox="0 0 24 24"><path d="M4 20 h16 M5 20 V9 l7-4 7 4 v11 M10 20 v-5 h4 v5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+    <!-- arrow right -->
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12 h15 M13 6 l6 6 -6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <!-- eye / clarity -->
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12 C5 7 8.5 5 12 5 s7 2 9.5 7 C19 17 15.5 19 12 19 S5 17 2.5 12 Z" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+    <!-- lock -->
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2.4" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M8 10 V7.5 a4 4 0 0 1 8 0 V10" fill="none" stroke="currentColor" stroke-width="2.1"/></symbol>
+    <!-- keyboard -->
+    <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 10 h0.01 M9 10 h0.01 M12 10 h0.01 M15 10 h0.01 M18 10 h0.01 M8 14 h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+    <!-- paper plane -->
+    <symbol id="i-plane" viewBox="0 0 100 100">
+      <path d="M94 8 L52 52 L42 94 Z" fill="#FFD200"/>
+      <path d="M94 8 L8 42 L52 52 Z" fill="#FFE774"/>
+      <path d="M52 52 L42 94 L33 70 Z" fill="#20206A"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="scrollbar" id="scrollbar"></div>
+
+<!-- flying paper plane — six flight-state assets, JS toggles which is visible -->
+<div class="plane" id="plane" aria-hidden="true">
+  <svg class="plane-svg" data-state="slightly-up-right" viewBox="0 0 228 155" preserveAspectRatio="xMidYMid meet">
+    <path d="M56.4551 58.3785L2.22183e-06 25.4148L228 0L123.724 154.334L86.5897 74.9022L56.4551 58.3785Z" fill="#FFD200"></path>
+    <path d="M56.4552 58.3785L72.2559 116.002L86.5897 74.9022L228 0L56.4552 58.3785Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M56.4552 58.3785L72.2559 116.002L86.5897 74.9022L228 0L56.4552 58.3785Z" fill="white"></path>
+    <path d="M72.2524 115.994L97.4414 98.0865L86.5863 74.8945L72.2524 115.994Z" fill="#333394"></path>
+  </svg>
+  <svg class="plane-svg" data-state="slightly-up-left" viewBox="0 0 265 155" preserveAspectRatio="xMidYMid meet">
+    <path d="M199.383 58.3785L265 25.4148L0 2.3167e-05L121.199 154.334L164.358 74.9022L199.383 58.3785Z" fill="#FFD200"></path>
+    <path d="M199.383 58.3785L181.018 116.002L164.358 74.9022L0 2.3167e-05L199.383 58.3785Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M199.383 58.3785L181.018 116.002L164.358 74.9022L0 2.3167e-05L199.383 58.3785Z" fill="white"></path>
+    <path d="M181.023 115.994L151.746 98.0866L164.363 74.8946L181.023 115.994Z" fill="#333394"></path>
+  </svg>
+  <svg class="plane-svg" data-state="slightly-down-right" viewBox="0 0 266 269" preserveAspectRatio="xMidYMid meet">
+    <path d="M69.3139 60.8063L113.181 27.731L265.767 153.743L19.4926 136.848L49.5714 70.9789L73.036 79.6051L69.3139 60.8063Z" fill="#FFD200"></path>
+    <path d="M108.417 63.874L75.7062 113.875L115.994 97.3959L265.767 153.743L108.417 63.874Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M69.3824 59.8086L73.0703 79.1063L265.767 153.743L69.3824 59.8086Z" fill="white"></path>
+  </svg>
+  <svg class="plane-svg" data-state="slightly-down-left" viewBox="0 0 302 303" preserveAspectRatio="xMidYMid meet">
+    <path d="M213.737 84.746L167.168 55.5997L26.084 194.37L301.553 127.272L234.288 93.1682L211.66 103.797L213.737 84.746Z" fill="#FFD200"></path>
+    <path d="M202.652 175.262L27.1707 193.768L209.045 149.771L202.652 175.262Z" fill="#333394"></path>
+    <path d="M175.048 91.1933L211.972 138.17L170.407 125.246L26.084 194.37L175.048 91.1933Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M213.583 83.7581L211.582 103.303L26.084 194.37L213.583 83.7581Z" fill="white"></path>
+  </svg>
+  <svg class="plane-svg" data-state="steep-down-right" viewBox="0 0 250 261" preserveAspectRatio="xMidYMid meet">
+    <path d="M88.6521 46.2623L135.5 20.2974L217.209 221.489L6.18932e-06 46.2623L66.4473 45.8143L82.9798 64.5673L88.6521 46.2623Z" fill="#FFD200"></path>
+    <path d="M216.619 221.716L64.002 122.294L69.002 101.294L216.619 221.716Z" fill="#333394"></path>
+    <path d="M121.584 67.5684L69.0198 95.9793L112.295 100.657L217.209 221.489L121.584 67.5684Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M89.187 45.4174L83.2473 64.1449L217.209 221.489L89.187 45.4174Z" fill="white"></path>
+  </svg>
+  <svg class="plane-svg" data-state="steep-down-left" viewBox="0 0 226 220" preserveAspectRatio="xMidYMid meet">
+    <path d="M85.8159 14.436L21.0757 36.7243L14.6324 219.775L214.076 39.2243L106.902 7.46162L96.6326 30.2552L85.8159 14.436Z" fill="#FFD200"></path>
+    <path d="M60.6293 44.504L119.233 56.1554L79.2599 73.3835L14.6324 219.775L60.6293 44.504Z" fill="#FFD200"></path>
+    <path opacity="0.46" d="M85.0556 13.7864L96.2525 29.9304L14.6324 219.775L85.0556 13.7864Z" fill="white"></path>
+  </svg>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============ 1 · HERO ============ -->
+<section class="sec hero" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <a href="#top" class="hero-logo reveal" aria-label="RWDZ — GUNB">
+        <img src="assets/rwdz-logo.svg" alt="RWDZ — GUNB" class="brand-logo" />
+      </a>
+      <h1 id="hero-h" class="reveal d1">Nowy<span class="rwdz">RWDZ</span></h1>
+      <p class="sub reveal d2">Rejestr wniosków, decyzji i zgłoszeń w nowoczesnej odsłonie.</p>
+      <div class="hero-cta reveal d4">
+        <a href="#cta" class="btn btn-primary btn-lg">Przejdź do nowego RWDZ <svg><use href="#i-arrow"/></svg></a>
+        <a href="#stary" class="btn btn-ghost btn-lg">Zobacz, co się zmieniło</a>
+      </div>
+      <div class="hero-stats reveal d5">
+        <div class="stat"><b data-count="5" data-suffix="x">0x</b><span>szybsze działanie</span></div>
+        <div class="stat"><b data-count="100" data-suffix="%">0%</b><span>przejrzyście</span></div>
+        <div class="stat"><b data-count="3" data-suffix="x">0x</b><span>integracje — SOPAB, eCRUB</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art reveal d3">
+      <div class="hero-blob" aria-hidden="true"></div>
+      <!-- recreated new RWDZ panel -->
+      <div class="app" id="hero-app" role="img" aria-label="Mockup nowego panelu RWDZ: boczne menu, wyszukiwarka i lista spraw.">
+        <div class="app-top">
+          <div class="acc"><svg><use href="#i-a11y"/></svg> Ustawienia dostępności <span style="color:#9a9db5;font-weight:400">· Wersja 05da7e64</span></div>
+          <div class="app-acct">Moje konto <span class="dot"></span></div>
+        </div>
+        <div class="app-body">
+          <aside class="app-side">
+            <div class="app-logo"><img src="assets/rwdz-lockup.svg" alt="RWDZ GUNB" /></div>
+            <div class="nav-item"><svg><use href="#i-list"/></svg><span>Biurko</span></div>
+            <div class="nav-item"><svg><use href="#i-monitor"/></svg><span>Raporty</span></div>
+            <div class="nav-sep"></div>
+            <div class="nav-item active"><svg><use href="#i-plus"/></svg><span>Wnioski</span></div>
+            <div class="nav-item"><svg><use href="#i-list"/></svg><span>Decyzje</span></div>
+            <div class="nav-item"><svg><use href="#i-env"/></svg><span>Zgłoszenia</span></div>
+            <div class="nav-sep"></div>
+            <div class="nav-item"><svg><use href="#i-eye"/></svg><span>Pomoc i instrukcja</span></div>
+          </aside>
+          <div class="app-main">
+            <div class="seg"><b class="on">Moje sprawy (18)</b><b>Wszystkie sprawy</b></div>
+            <div class="tabs"><b>Wszystkie</b><b class="on">Otwarte</b><b>Zakończone</b></div>
+            <div class="search-card">
+              <div class="search-row">
+                <div class="search-input">Wpisz np. numer sprawy, adres inwestycji, dane inwestora</div>
+                <button class="btn-find"><svg><use href="#i-search"/></svg> Szukaj</button>
+                <span class="btn-filter"><svg><use href="#i-filter"/></svg> Pokaż filtry</span>
+              </div>
+              <div class="radios"><span><i></i>Numer wniosku</span><span><i></i>Numer decyzji</span><span><i></i>ID e-Budownictwo</span><span><i></i>Nazwa inwestora</span></div>
+            </div>
+            <div class="tbl">
+              <div class="tbl-head"><span>Numer RWDZ</span><span>Data wpływu</span><span>Termin</span><span>Pozostało</span><span>Status</span></div>
+              <div class="tbl-row"><span class="num">R/WNIOSEK/00128/2026<span class="tag">WERSJA ROBOCZA</span><div class="meta">Inwestor: Budowniczy S.C.</div></span><span>2026-01-15</span><span>2026-03-21</span><span>61 dni</span><span><span class="pill warn">Uzupełnianie</span></span></div>
+              <div class="tbl-row"><span class="num">R/WNIOSEK/00113/2026<div class="meta">Inwestor: Jan Kowalski</div></span><span>2026-04-10</span><span>2026-06-14</span><span>34 dni</span><span><span class="pill">Opiniowanie</span></span></div>
+              <div class="tbl-row"><span class="num">R/WNIOSEK/00057/2026<div class="meta">Inwestor: Zielone Ogrody Sp. z o.o.</div></span><span>2025-11-06</span><span>—</span><span>65 dni</span><span><span class="pill">Otwarte</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · STARY SYSTEM ============ -->
+<section class="sec sec-paper" id="stary" aria-labelledby="stary-h">
+  <div class="wrap split">
+    <div class="reveal">
+      <h2 id="stary-h" class="sec-head" style="font-size:clamp(30px,4.4vw,54px);font-weight:800;margin-top:18px">Mniej klikania.<br>Szybciej.<br>Więcej przejrzystości.</h2>
+      <p class="lede problem-lede" style="margin-top:26px"><span class="x" aria-hidden="true">!</span>Dotychczasowy RWDZ spełnia swoją funkcję — ale ma już swoje lata. Nowa wersja usprawnia RWDZ w każdym obszarze.</p>
+    </div>
+    <div class="reveal d2" style="position:relative">
+      <!-- real screenshot of the current (old) RWDZ system -->
+      <figure class="old-shot" id="old-screen">
+        <div class="old-shot-bar" aria-hidden="true">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="old-shot-url">rwdz.gunb.gov.pl/panel</span>
+        </div>
+        <div class="old-shot-crop">
+          <img src="assets/old-system.jpg" alt="Zrzut obecnej wersji systemu RWDZ: ciężki, tabelaryczny interfejs z rozbudowanym drzewem filtrów, wieloma polami wyszukiwania i licznymi kolumnami." loading="lazy" />
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · TRANSFORMACJA ============ -->
+<section class="transform" id="transformacja" aria-labelledby="tf-h">
+  <div class="transform-track" id="tf-track">
+    <div class="transform-sticky">
+      <div class="bigword" id="bigword">NOWY RWDZ</div>
+      <div class="tf-headline">
+        <h2 id="tf-h" style="margin-top:14px">Zmieniliśmy sposób pracy z danymi.</h2>
+        <p class="lede" id="tf-sub" style="margin:14px auto 0">Nowy RWDZ porządkuje najważniejsze informacje, upraszcza wyszukiwanie i pokazuje dane w bardziej czytelny sposób.</p>
+      </div>
+      <div class="tf-wave" id="tf-wave" aria-hidden="true"></div>
+      <div class="stage">
+        <!-- OLD slides out -->
+        <div class="stage-screen" id="tf-old">
+          <figure class="tf-shot">
+            <div class="tf-shot-bar" aria-hidden="true">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="tf-shot-url">rwdz.gunb.gov.pl — wersja obowiązująca</span>
+            </div>
+            <img src="assets/staryrwdz.jpg" alt="Stary interfejs RWDZ: ciężki, tabelaryczny ekran z rozbudowanym drzewem filtrów, wieloma polami wyszukiwania i gęstą tabelą wniosków." loading="lazy" />
+          </figure>
+        </div>
+        <!-- NEW slides in -->
+        <div class="stage-screen" id="tf-new">
+          <figure class="tf-shot">
+            <div class="tf-shot-bar" aria-hidden="true">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="tf-shot-url">rwdz.gunb.gov.pl/panel</span>
+            </div>
+            <img src="assets/nowyrwdz.jpg" alt="Nowy panel RWDZ: czytelna tabela wniosków z numerem RWDZ, datą wpływu, czasem na rozpatrzenie, terminem, statusem i akcją Szczegóły." loading="lazy" />
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · CO NOWEGO ============ -->
+<section class="sec sec-yellow" id="nowosci" aria-labelledby="now-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 id="now-h">Co nowego?</h2>
+      <p class="lede">Sześć konkretnych usprawnień, które razem zmieniają sposób, w jaki korzystasz z rejestru.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal d1"><div class="ic" style="color:var(--blue)"><svg><use href="#i-monitor"/></svg></div><div class="n">01</div><h3>Nowoczesny wygląd</h3><p>Czysty, uporządkowany interfejs zaprojektowany od nowa.</p></article>
+      <article class="card reveal d2"><div class="ic" style="color:var(--blue)"><svg><use href="#i-search"/></svg></div><div class="n">02</div><h3>Szybsze wyszukiwanie</h3><p>Najważniejsze filtry i wyszukiwarka są łatwiej dostępne.</p></article>
+      <article class="card reveal d3"><div class="ic" style="color:var(--blue)"><svg><use href="#i-list"/></svg></div><div class="n">03</div><h3>Czytelniejsze dane</h3><p>Informacje o sprawach są pokazane w prostszej strukturze.</p></article>
+      <article class="card reveal d4"><div class="ic" style="color:var(--blue)"><svg><use href="#i-a11y"/></svg></div><div class="n">04</div><h3>Lepsza dostępność</h3><p>Interfejs projektowany zgodnie z zasadami dostępności cyfrowej.</p></article>
+      <article class="card reveal d5"><div class="ic" style="color:var(--blue)"><svg><use href="#i-shield"/></svg></div><div class="n">05</div><h3>Większe bezpieczeństwo</h3><p>System tworzony z myślą o stabilności i ochronie danych.</p></article>
+      <article class="card reveal d6"><div class="ic" style="color:var(--blue)"><svg><use href="#i-devices"/></svg></div><div class="n">06</div><h3>Integracja z systemami GUNB</h3><p>Połączenie z SOPAB, eCRUB i innymi rejestrami — dane w jednym miejscu.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · NOWY INTERFEJS (sticky) ============ -->
+<section class="sec" id="interfejs" aria-labelledby="int-h">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-bottom:20px">
+      <h2 id="int-h">Nowy interface oraz wszystko inne czego potrzebujesz.</h2>
+      <p class="lede">Nowy panel porządkuje sprawy, wnioski, decyzje i zgłoszenia. Najważniejsze akcje są widoczne od razu, a układ pomaga szybciej zrozumieć status sprawy.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-sticky">
+        <div class="feature-app">
+          <div class="app" id="feat-app">
+            <div class="app-top"><div class="acc"><svg><use href="#i-a11y"/></svg> Ustawienia dostępności</div><div class="app-acct">Moje konto <span class="dot"></span></div></div>
+            <div class="app-body">
+              <aside class="app-side">
+                <div class="app-logo"><img src="assets/rwdz-lockup.svg" alt="RWDZ GUNB" /></div>
+                <div class="nav-item" data-ck="3"><svg><use href="#i-list"/></svg><span>Biurko</span></div>
+                <div class="nav-item active" data-ck="1"><svg><use href="#i-plus"/></svg><span>Wnioski</span></div>
+                <div class="nav-item"><svg><use href="#i-list"/></svg><span>Decyzje</span></div>
+                <div class="nav-item"><svg><use href="#i-env"/></svg><span>Zgłoszenia</span></div>
+                <div class="nav-sep"></div>
+                <div class="nav-item"><svg><use href="#i-eye"/></svg><span>Pomoc i instrukcja</span></div>
+              </aside>
+              <div class="app-main">
+                <div class="seg"><b class="on">Moje sprawy (18)</b><b>Wszystkie sprawy</b></div>
+                <div class="tabs"><b>Wszystkie</b><b class="on">Otwarte</b><b>Zakończone</b></div>
+                <div class="search-card" data-ck="2">
+                  <div class="search-row"><div class="search-input">Wpisz np. numer sprawy, adres inwestycji, dane inwestora</div><button class="btn-find"><svg><use href="#i-search"/></svg> Szukaj</button><span class="btn-filter"><svg><use href="#i-filter"/></svg> Filtry</span></div>
+                  <div class="radios"><span><i></i>Numer wniosku</span><span><i></i>Numer decyzji</span><span><i></i>ID e-Budownictwo</span></div>
+                </div>
+                <button class="btn-add" data-ck="4"><svg><use href="#i-plus"/></svg> Dodaj wniosek</button>
+                <div class="tbl">
+                  <div class="tbl-head"><span>Numer RWDZ</span><span>Data wpływu</span><span>Termin</span><span>Pozostało</span><span>Status</span></div>
+                  <div class="tbl-row" data-ck="5"><span class="num">R/WNIOSEK/00128/2026<div class="meta">Budowniczy S.C.</div></span><span>2026-01-15</span><span>2026-03-21</span><span>61 dni</span><span><span class="pill warn">Uzupełnianie</span></span></div>
+                  <div class="tbl-row"><span class="num">R/WNIOSEK/00113/2026<div class="meta">Jan Kowalski</div></span><span>2026-04-10</span><span>2026-06-14</span><span>34 dni</span><span><span class="pill">Opiniowanie</span></span></div>
+                  <div class="tbl-row"><span class="num">R/WNIOSEK/00057/2026<div class="meta">Zielone Ogrody Sp. z o.o.</div></span><span>2025-11-06</span><span>—</span><span>65 dni</span><span><span class="pill">Otwarte</span></span></div>
+                </div>
+              </div>
+            </div>
+            <!-- checkmarks -->
+            <span class="ck" data-ckid="1" style="left:8%;top:42%"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span>
+            <span class="ck" data-ckid="2" style="left:46%;top:34%"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span>
+            <span class="ck" data-ckid="3" style="left:6%;top:26%"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span>
+            <span class="ck" data-ckid="4" style="right:6%;top:48%;left:auto"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span>
+            <span class="ck" data-ckid="5" style="left:32%;top:68%"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <div class="feat-steps" id="feat-steps">
+        <div class="feat-step on" data-step="1"><div class="num">01</div><h3>Wnioski w jednym miejscu</h3><p>Boczne menu prowadzi prosto do wniosków, decyzji i zgłoszeń — bez przeszukiwania zakładek.</p></div>
+        <div class="feat-step" data-step="2"><div class="num">02</div><h3>Wyszukiwarka na pierwszym planie</h3><p>Szukaj po numerze sprawy, adresie inwestycji lub danych inwestora. Filtry są w zasięgu ręki.</p></div>
+        <div class="feat-step" data-step="3"><div class="num">03</div><h3>Czytelne biurko spraw</h3><p>Najważniejsze widoki rozdzielone na „Moje sprawy" i „Wszystkie sprawy", z prostym podziałem na statusy.</p></div>
+        <div class="feat-step" data-step="4"><div class="num">04</div><h3>Akcje zawsze widoczne</h3><p>„Dodaj wniosek" i „Szczegóły" są wyraźne i przewidywalne — wiesz, gdzie kliknąć.</p></div>
+        <div class="feat-step" data-step="5"><div class="num">05</div><h3>Status sprawy od razu</h3><p>Termin, czas na rozpatrzenie i status widać bez wchodzenia w szczegóły.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · PROSTSZE FORMULARZE ============ -->
+<section class="sec forms" id="formularze" aria-label="Prostsze formularze">
+  <svg class="env-bg" aria-hidden="true"><use href="#i-env"/></svg>
+  <div class="wrap forms-grid">
+    <div class="reveal">
+      <p class="lede" style="color:#C7C9FF;margin-top:0"><strong class="lede-lead">Nowe formularze</strong></p>
+      <ul class="trust-list" style="margin-top:26px">
+        <li><span class="ck-y"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span> Przejrzysta forma i wyraźnie oznaczone pola obowiązkowe.</li>
+        <li><span class="ck-y"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span> Jednoznaczne przyciski akcji i komunikaty.</li>
+        <li><span class="ck-y"><svg style="color:var(--navy)"><use href="#i-check"/></svg></span> Mniej pól na ekranie, więcej zrozumienia.</li>
+      </ul>
+    </div>
+    <div class="reveal d2" id="modal-anchor">
+      <div class="modal" id="form-modal" role="img" aria-label="Mockup modala Dodaj wniosek z czytelnymi polami i przyciskami.">
+        <div class="modal-head"><b>Dodaj wniosek</b><span class="x">✕</span></div>
+        <div class="modal-body">
+          <div class="fld"><label>Numer wniosku nadany w urzędzie <span class="req">*</span></label><div class="inp"></div></div>
+          <div class="fld"><label>Data wpływu <span class="req">*</span></label><div class="inp">2026.06.08</div></div>
+          <div class="fld"><label>Wniosek złożony elektronicznie <span class="req">*</span></label><div class="radio2"><span><i></i> tak</span><span><i></i> nie</span></div></div>
+          <div class="fld"><label>Identyfikator wniosku z e-Budownictwa</label><div class="inp muted"></div></div>
+          <div class="fld"><label>Typ inwestycji / Czas na rozpatrzenie <span class="req">*</span></label><div class="inp">Wybierz z listy ▾</div></div>
+          <div class="modal-foot"><button class="b1">Anuluj</button><button class="b2">Dodaj wniosek</button></div>
+        </div>
+        <div class="modal-note">* — Pole obowiązkowe</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9 · DOSTĘPNOŚĆ ============ -->
+<section class="sec" id="dostepnosc" aria-labelledby="a11y-h">
+  <span class="hc-badge" id="hc-badge" aria-hidden="true"><span class="hc-dot"></span>Podgląd: tryb wysokiego kontrastu</span>
+  <div class="wrap a11y-grid">
+    <div class="reveal">
+      <h2 id="a11y-h" class="sec-head" style="font-size:clamp(30px,4.4vw,54px);margin-top:18px">Projektowany z myślą o dostępności.</h2>
+      <p class="lede" style="margin-top:22px">Nowy RWDZ jest łatwiejszy w obsłudze także dla osób korzystających z klawiatury, technologii wspomagających i ustawień dostępności.</p>
+      <a href="#dostepnosc" class="btn btn-primary" style="margin-top:26px"><svg><use href="#i-a11y"/></svg> Ustawienia dostępności</a>
+      <button class="motion-toggle" id="motion-toggle" aria-pressed="false">
+        Ogranicz animacje
+        <span class="switch" aria-hidden="true"><span class="knob"></span></span>
+      </button>
+    </div>
+    <div class="reveal d2 a11y-cards">
+      <div class="a11y-card"><h3><span class="pic" style="color:var(--blue)"><svg><use href="#i-keyboard"/></svg></span> Obsługa z klawiatury</h3><p>Logiczna kolejność fokusu i widoczne stany zaznaczenia.</p></div>
+      <div class="a11y-card"><h3><span class="pic" style="color:var(--blue)"><svg><use href="#i-eye"/></svg></span> Wysoki kontrast</h3><p>Czytelne kolory i typografia spełniające wymagania WCAG.<div class="contrast-demo"><span class="cb b1">Aa</span><span class="cb b2">Aa</span><span class="cb b3">Aa</span></div></p></div>
+      <div class="a11y-card"><h3><span class="pic" style="color:var(--blue)"><svg><use href="#i-list"/></svg></span> Czytelna struktura</h3><p>Treści są prezentowane w czytelnej hierarchii.</p></div>
+      <div class="a11y-card"><h3><span class="pic" style="color:var(--blue)"><svg><use href="#i-monitor"/></svg></span> Ograniczenie ruchu</h3><p>Animacje można wyłączyć — strona respektuje ustawienia systemu.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 · FINAL CTA ============ -->
+<section class="sec final" id="cta" aria-labelledby="cta-h">
+  <div class="final-blob" aria-hidden="true"></div>
+  <svg class="final-plane" id="final-plane" aria-hidden="true"><use href="#i-plane"/></svg>
+  <div class="wrap">
+    <h2 id="cta-h" class="reveal d1" style="margin-top:18px">Nowy RWDZ jest bliżej niż myślisz.</h2>
+    <p class="reveal d2 final-date">Start systemu <b>20 listopada 2026</b></p>
+    <a href="#top" class="btn btn-primary btn-lg reveal d3">Przejdź do nowego RWDZ <svg><use href="#i-arrow"/></svg></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a href="#top" class="footer-logo" aria-label="RWDZ — GUNB">
+          <img src="assets/rwdz-logo-white.svg" alt="RWDZ — GUNB" class="footer-brand" />
+        </a>
+        <p style="max-width:34ch;margin-top:16px;color:#9799D6;font-size:15px">Rejestr Wniosków, Decyzji i Zgłoszeń. Oficjalny rejestr prowadzony przez Główny Urząd Nadzoru Budowlanego.</p>
+      </div>
+      <div class="footer-cols">
+        <div><h4>Rejestr</h4><a href="#nowosci">Co nowego</a><a href="#interfejs">Nowy interfejs</a><a href="#formularze">Formularze</a><a href="#dostepnosc">Dostępność</a></div>
+        <div><h4>Informacje</h4><a href="#dostepnosc">Deklaracja dostępności</a><a href="#top">Polityka prywatności</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Główny Urząd Nadzoru Budowlanego · rwdz.gunb.gov.pl</span>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
